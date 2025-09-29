@@ -4,16 +4,18 @@ public class RetoLogrosGamer_Enunciado {
         int kills = 0;
         int muertes = 0;
         int asistencias = 0;
-        int tiempoMin = 1; //minutos jugados
+        int tiempoMin = 1; // minutos jugados
         int objetivos = 3;
         boolean desconexion = false;
-        int dañoH = 32000; // daño hecho
-        int dañoR = 9000; // daño recibido
+        int danoH = 32000; // daño hecho
+        int danoR = 9000;  // daño recibido
         int oro = 1500;
 
-        // *************  RAGE QUIT *************
+        // *************  RAGE QUIT para calculara una sola vez y guardarla *************
+        boolean tuvoRq = (desconexion && tiempoMin < 5);
 
-        if (desconexion && tiempoMin < 5) {
+        // comprobamos el RAGE QUIT, con la variable guardada para evitar repetir el cálculo
+        if (tuvoRq) {
             System.out.println("Logro NEGATIVO: Rage Quit 😠");
             return; // fin, no te llevas el logro PRO
         }
@@ -45,14 +47,14 @@ public class RetoLogrosGamer_Enunciado {
         }
 
         if (muertes == 0 && kills >= 5) {
-            System.out.println("Logro: Intocable \uD83D\uDC51");
+            System.out.println("Logro: Intocable 👑");
         }
 
         if (tiempoMin > 60) {
             System.out.println("Logro: Maratón gamer ⏱️");
         }
 
-        if (dañoH > dañoR * 2) {
+        if (danoH > danoR * 2) {
             System.out.println("Logro: Dominio total 💥");
         }
 
@@ -60,7 +62,7 @@ public class RetoLogrosGamer_Enunciado {
             System.out.println("Logro: Objetivos de mapa 🎯");
         }
 
-        // ******** Logros para Fortnite, LOL, Minecraft, Pokemon ********
+        // ******** Logros para Fortnite, LoL, Minecraft, Pokemon ********
         if (juego.equals("Fortnite")) {
             if (kills >= 15 && muertes <= 2) {
                 System.out.println("Victoria agresiva (Fortnite) 🔫");
@@ -73,28 +75,33 @@ public class RetoLogrosGamer_Enunciado {
             }
         } else if (juego.equals("LoL")) {
             if (objetivos >= 2 && asistencias >= 10) {
-                System.out.println("Shotcaller (LoL) \uD83D\uDDE3\uFE0F");
+                System.out.println("Shotcaller (LoL) 🗣️");
             }
-            if (dañoH >= 30000 && muertes <= 3) {
+            if (danoH >= 30000 && muertes <= 3) {
                 System.out.println("Carry principal (LoL) 🛡️");
             }
             if ((kills + asistencias) >= 25) {
                 System.out.println("Impacto masivo 🌪️");
             }
         } else if (juego.equals("Minecraft")) {
-            if (tiempoMin >= 45 && dañoR == 0) {
-                System.out.println("Superviviente pacífico (MC) \uD83C\uDF3F");
+            if (tiempoMin >= 45 && danoR == 0) {
+                System.out.println("Superviviente pacífico (MC) 🌿");
             }
             if (objetivos >= 5) {
-                System.out.println("Constructor incansable (MC) \uD83E\uDDF1");
+                System.out.println("Constructor incansable (MC) 🧱");
             }
         } else if (juego.equals("Pokemon")) {
-            if (kills >= 6 && dañoR <= 1000) {
+            if (kills >= 6 && danoR <= 1000) {
                 System.out.println("Entrenador maestro (PKMN) 🧢");
             }
             if (asistencias >= 3) {
                 System.out.println("Apoyo del equipo (PKMN) 🤝");
             }
+        }
+
+        // ******** Uso de la variable tuvoRq más adelante ********
+        if (tuvoRq) {
+            System.out.println("⚠️ Este jugador abandonó la partida temprano.");
         }
     }
 }
