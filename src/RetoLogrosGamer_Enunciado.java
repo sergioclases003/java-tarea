@@ -31,7 +31,7 @@ public class RetoLogrosGamer_Enunciado {
         }
 
         // ************* Clasificación KDA *************
-        if (kda > 5) {
+        if (kda > 5 && (tuvoRq==false)) {
             System.out.println("Jugador PRO");
         } else if (kda >= 3 && kda < 5) {
             System.out.println("Jugador BUENO");
